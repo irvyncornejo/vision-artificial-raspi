@@ -1,6 +1,8 @@
 import time
 
-from gpiozero import RGBLED, Buzzer
+from gpiozero import RGBLED
+from gpiozero import Buzzer
+from gpiozero import DistanceSensor
 
 class Chimalli:
     """
@@ -11,6 +13,7 @@ class Chimalli:
         self.flash = RGBLED(red=21, green=20, blue=19)
         self.colores = [(0.5, 1, 1), (1, 0.5, 1), (1, 1, 0.5)]
         self.buzzer = Buzzer(18)
+        self.ultrasonico = DistanceSensor(16, 7)#echo, trigger
 
     def genera_flash(self):
         for color in self.colores:
@@ -28,3 +31,14 @@ class Chimalli:
         time.sleep(tiempo)
         self.buzzer.off()
         time.sleep(tiempo)
+        
+    def leer_ultrasonico(self):
+        """
+        Función que activa la lectura del sensor ultrasonico, la distancia la
+        regresa en cm
+        """
+        time.sleep(1)
+        cm = self.ultrasonico.distance * 100
+        return cm
+    
+    

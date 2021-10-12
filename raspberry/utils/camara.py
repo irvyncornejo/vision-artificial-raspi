@@ -18,7 +18,7 @@ class Camara:
         return:
             - url: String con la ruta en la que se puede tomar la foto
         """
-        path = lambda x: f'/tmp/imagenes/image{x}.jpg'
+        path = lambda x: f'/tmp/image{x}.jpg'
         hora = datetime.now()
         hora_string = hora.strftime('%d%m%Y%H%M%S')
         url = path(hora_string)
