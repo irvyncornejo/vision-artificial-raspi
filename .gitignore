@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#NODE
+
+# Dependency directories
+colores/node_modules/
+colores/jspm_packages/
+
+colores/package-lock.json
