@@ -1,14 +1,18 @@
+import base64
 from typing import Mapping, Any
 from .domain import SchemaImage
 from marshmallow.exceptions import ValidationError
 from .services_types import ValidatorContainer, BodyImage
 
 class IdentityValidator:
-    def __init__(self, conteiner: ValidatorContainer) -> None:
+    def __init__(self, container: ValidatorContainer) -> None:
         self._image: BodyImage
         self._schema_image: Any = SchemaImage 
-        self._bucket_service = conteiner.bucket_service
-        self._rekognition_service = conteiner.rekognition_service
+        self._bucket_service = container.bucket_service
+        self._rekognition_service = container.rekognition_service
+    
+    def _decode_image(self) -> base64:
+        return base64.b64decode(self._image['content'])
 
     def _validate_image(self, body: Mapping) -> None:
         self._error: Any = ''
@@ -21,13 +25,16 @@ class IdentityValidator:
             self._error = error.normalized_messages()
 
     def _create_image(self):
-        self._bucket_service.create_object(
-            content=self._image['content'],
-            name_image=self._image['name_image']
+        self._bucket_service.create_image(
+            content=self._decode_image(),
+            name_image=self._image['name_image'],
+            extension=self._image['extension']
         )
 
     def _make_validation(self):
-        self._rekognition_service.validate(name_image=self._image['name_image'])
+        self._rekognition_service.validate(
+            content=self._decode_image()
+        )
 
     def run(self, body: Mapping) -> Mapping:
         self._validate_image(body)

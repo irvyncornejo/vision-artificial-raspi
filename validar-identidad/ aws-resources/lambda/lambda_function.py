@@ -9,35 +9,11 @@ def get_validator_container() -> ValidatorContainer:
         rekognition_service=Rekognition()
     )
 
-def lambda_handler(event, context):
+def lambda_handler(event, context: None):
     return IdentityValidator(
-        conteiner=get_validator_container()
+        container=get_validator_container()
     ).run(event)
-    # file_name=event['file_name']
-    # bucket=event['bucket']
-    
-    # services = Process()
-    # image = Image(file_name, bucket)
-    # labels_image =  services.load(image.get_labels())
-    
-    # if labels_image['vehicle']:
-    #     text_image = image.get_text()
-    #     text = services.text_validate(text_image)
-    #     print({"Labels": labels_image['data'],
-    #         "Text": text})
-    #     return {
-    #         "Labels": labels_image['data'],
-    #         "Text": text, 
-    #         "Parents": labels_image['parents']
-    #     }
-    # else:
-    #     print({"Labels": labels_image['data'],
-    #         "Text": None})
-    #     return {
-    #         "Labels": labels_image['data'],
-    #         "Parents": labels_image['parents'],
-    #         "Text": None
-    #     }
+
 
 lambda_handler({
     'name_image': 'nombre_test',
