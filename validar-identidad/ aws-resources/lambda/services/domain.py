@@ -7,4 +7,4 @@ class SchemaImage(Schema):
         required=True,
         validate=OneOf(['png', 'jpeg'])
     )
-    content = fields.Str(required=True, validate=Length(min=2))
+    content = fields.Str(required=True, validate=Length(min=254))
