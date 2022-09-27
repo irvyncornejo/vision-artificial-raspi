@@ -1,10 +1,13 @@
 const video = document.getElementById('video')
+const sizeVideo = { width:720, height:560 }
 
 const startVideo = () => {
   navigator.mediaDevices.getUserMedia(
-      { audio: false,
-        video: {width:720, height:560} 
-      })
+      { 
+        audio: false,
+        video:  sizeVideo
+      }
+  )
     .then(stream => video.srcObject = stream)
     .catch(error => console.error(error))
 }
@@ -20,7 +23,7 @@ const main = () => {
     .catch(error => console.error(error))
 }
 
-video.addEventListener('play', () => {
+const videoDetectionHandler = () => {
   const canvas = faceapi.createCanvasFromMedia(video)
   document.body.append(canvas)
   const displaySizeVideo = { width: video.width, height: video.height }
@@ -31,10 +34,10 @@ video.addEventListener('play', () => {
       new faceapi.TinyFaceDetectorOptions())
         .withFaceLandmarks()
         .withFaceExpressions()
-      const resizedDetections = faceapi.resizeResults(detections, displaySizeVideo)
-      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-      faceapi.draw.drawDetections(canvas, resizedDetections)
+    const resizedDetections = faceapi.resizeResults(detections, displaySizeVideo)
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+    faceapi.draw.drawDetections(canvas, resizedDetections)
   }, 200)
-})
+}
 
 main()
