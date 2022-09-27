@@ -1,20 +1,10 @@
-from time import sleep
+from flask import Flask
 
-from gpiozero import Button
+app = Flask(__name__)
 
-from utils.camara import Camara
-from utils.chimalli import Chimalli
-
-import I2C_LCD_driver
-
-camara = Camara()
-chimalli = Chimalli()
-mylcd = I2C_LCD_driver.lcd()
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
 
 if __name__=='__main__':
-    while True:
-        distancia = chimalli.leer_ultrasonico()
-        print(distancia)
-        mylcd.lcd_display_string(f'{distancia}', 1)
-        sleep(1)
-        mylcd.lcd_clear()
+    app.run(debug=True, port=5005, host='0.0.0.0')
