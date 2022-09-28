@@ -14,10 +14,10 @@ const startVideo = () => {
 
 const main = () => {
   Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri('./models'),
-    faceapi.nets.faceLandmark68Net.loadFromUri('./models'),
-    faceapi.nets.faceRecognitionNet.loadFromUri('./models'),
-    faceapi.nets.faceExpressionNet.loadFromUri('./models'),
+    faceapi.nets.tinyFaceDetector.loadFromUri("static/js/models"),
+    faceapi.nets.faceLandmark68Net.loadFromUri("static/js/models"),
+    faceapi.nets.faceRecognitionNet.loadFromUri("static/js/models"),
+    faceapi.nets.faceExpressionNet.loadFromUri("static/js/models"),
   ])
     .then(startVideo)
     .catch(error => console.error(error))
@@ -25,7 +25,8 @@ const main = () => {
 
 const videoDetectionHandler = () => {
   const canvas = faceapi.createCanvasFromMedia(video)
-  document.body.append(canvas)
+  const videoContainer = document.getElementById('videoContainer')
+  videoContainer.appendChild(canvas)
   const displaySizeVideo = { width: video.width, height: video.height }
   faceapi.matchDimensions(canvas, displaySizeVideo)
   setInterval(async () => {

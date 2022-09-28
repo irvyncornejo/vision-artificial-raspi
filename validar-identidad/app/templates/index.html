@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ context.title }}</title>
+    <script defer src="{{ url_for('static', filename='js/face-api.min.js')}}"></script>
+    <script defer src="{{ url_for('static', filename='js/main.js')}}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        .video-container {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            position: absolute;
+
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <nav>
+            <div class="nav-wrapper indigo">
+              <a href="#" class="brand-logo">Ingreso</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html">Registrar Usuario</a></li>
+                <li><a href="badges.html">Descargar Registros</a></li>
+              </ul>
+            </div>
+          </nav>
+    </div>
+    <div id="videoContainer" class="video-container">
+        <video 
+        id="video" 
+        width="720" 
+        height="560" 
+        autoplay 
+        muted
+        onplay="videoDetectionHandler()"
+        >
+        </video>
+    </div>
+</body>
+</html>
