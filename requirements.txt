@@ -1,0 +1,5 @@
+marshmallow
+pytest
+boto3
+flask
+pyopenssl
