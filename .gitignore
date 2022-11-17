@@ -137,3 +137,4 @@ colores/jspm_packages/
 colores/package-lock.json
 
 img.py
+opencv/basico/results/*
