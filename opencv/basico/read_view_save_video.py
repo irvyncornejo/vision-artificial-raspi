@@ -16,7 +16,7 @@ def get_video(path: str='results/video_test.avi') -> None:
 
 def read_video_camera() -> None:
     try:
-        video_capture = cv2.VideoCapture(0)
+        video_capture = cv2.VideoCapture(2)
         video_output = cv2.VideoWriter('results/video_test.avi', cv2.VideoWriter_fourcc(*'XVID'), 20.0, (640, 480))
         while video_capture.isOpened():
             ret, image = video_capture.read()
@@ -24,7 +24,7 @@ def read_video_camera() -> None:
                 cv2.imshow('video', image)
                 video_output.write(image)
                 # if OS is based in 64 bits is necesary add 0xff
-                if cv2.waitKey(1) & 0xFF == ord('s'):
+                if cv2.waitKey(2) & 0xFF == ord('s'):
                     break
         video_capture.release()
         video_output.release()
@@ -34,4 +34,4 @@ def read_video_camera() -> None:
 
 
 if __name__=="__main__":
-    get_video()
+    read_video_camera()
